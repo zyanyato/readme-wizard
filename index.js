@@ -2,6 +2,34 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 
+function getLicenseText(license) {
+    switch (license) {
+        case "MIT License":
+            return `
+        This project is licensed under the MIT license. See [LICENSE](LICENSE) for more details.
+        
+        ![MIT License](https://img.shields.io/badge/License-MIT-purple
+)
+        `;
+        case "Apache License 2.0":
+            return `
+        This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for more details.
+
+        ![Apache License 2.0](https://img.shields.io/badge/License-Apache%20License%202.0-brown
+)
+        `;
+        case "The Unlicense":
+            return `
+        This project is licensed under The Unlicense. See [LICENSE](LICENSE) for more details.
+        
+        ![Unlicense](https://img.shields.io/badge/License-The%20Unlicense-yellow
+)
+        `;
+        default:
+            return '';
+    }
+}
+
 // TODO: Create an array of questions for user input
 const questions = [
     {
@@ -35,9 +63,10 @@ const questions = [
         message: 'Provide guidelines for contributing:'
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'license',
-        message: 'Specify the license type:'
+        message: 'Choose the license type:',
+        choices: ["MIT License", "Apache License 2.0", "The Unlicense"],
     }];
 
 // TODO: Create a function to write README file
@@ -46,37 +75,38 @@ function writeToFile(fileName, data) {
         if (err) {
             console.error('Error creating README.md', err);
         } else {
-            console.log('README.ms has been created successfully!');
+            console.log('README.md has been created successfully!');
         }
     });
 }
 
 function generateREADME(data) {
     return `
-    #${data.title}
+# ${data.title}
     
-    ##Description
-    ${data.description}
+## Description
+${data.description}
     
-    ##Table of Contents
-    -[Installation](#installation)
-    -[Usage](#usage)
-    -[Contributing](#contributing)
-    -[License](#license)
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
     
-    ##Installation
-    ${data.installation}
+## Installation
+${data.installation}
     
-    ##Usage
-    ${data.usage}
+## Usage
+${data.usage}
     
-    ##Contributing
-    ${data.contributing}
+## Contributing
+${data.contributing}
     
-    ##License
-    ${data.license}
+## License
+${getLicenseText(data.license)}
     `;
 }
+
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
@@ -84,6 +114,7 @@ function init() {
             const readmeContent = generateREADME(answers);
 
             writeToFile('README.md', readmeContent);
+            // writeToFile('license.txt', licenseContent);
         })
         .catch((error) => {
             console.error('Error:', error);
