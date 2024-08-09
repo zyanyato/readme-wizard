@@ -1,6 +1,12 @@
 // TODO: Include packages needed for this application
 import inquirer from 'inquirer';
 import fs from 'fs';
+import path from 'path';
+
+function generateUniqueFilename(baseName) {
+    const timestamp = new Date().toISOString().replace(/[:.]/g,'-');
+    return `${baseName}-${timestamp}.md`;
+}
 
 function getLicenseText(license) {
     switch (license) {
@@ -8,22 +14,19 @@ function getLicenseText(license) {
             return `
         This project is licensed under the MIT license. See [LICENSE](LICENSE) for more details.
         
-        ![MIT License](https://img.shields.io/badge/License-MIT-purple
-)
+        ![MIT License](https://img.shields.io/badge/License-MIT-purple)
         `;
         case "Apache License 2.0":
             return `
         This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for more details.
 
-        ![Apache License 2.0](https://img.shields.io/badge/License-Apache%20License%202.0-brown
-)
+        ![Apache License 2.0](https://img.shields.io/badge/License-Apache%20License%202.0-brown)
         `;
         case "The Unlicense":
             return `
         This project is licensed under The Unlicense. See [LICENSE](LICENSE) for more details.
         
-        ![Unlicense](https://img.shields.io/badge/License-The%20Unlicense-yellow
-)
+        ![Unlicense](https://img.shields.io/badge/License-The%20Unlicense-yellow)
         `;
         default:
             return '';
@@ -61,6 +64,16 @@ const questions = [
         type: 'input',
         name: 'contributing',
         message: 'Provide guidelines for contributing:'
+    },
+    {
+        type: 'input',
+        name: 'username',
+        message: 'Provide your GitHub username for questions:'
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'For further questions, place your email:'
     },
     {
         type: 'list',
@@ -102,6 +115,11 @@ ${data.usage}
 ## Contributing
 ${data.contributing}
     
+## Questions
+
+- [GitHub](https://github.com/${data.username}),
+- Additional questions, please reach to: ${data.email}
+
 ## License
 ${getLicenseText(data.license)}
     `;
@@ -112,10 +130,12 @@ function init() {
     inquirer.prompt(questions)
         .then((answers) => {
             const readmeContent = generateREADME(answers);
+            const fileName = generateUniqueFilename('README');
+            const filePath = path.join(process.cwd(), fileName);
 
-            writeToFile('README.md', readmeContent);
-            // writeToFile('license.txt', licenseContent);
-        })
+            writeToFile('filePath', readmeContent);
+            })
+        
         .catch((error) => {
             console.error('Error:', error);
         });

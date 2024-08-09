@@ -25,12 +25,16 @@ You will be prompt with the next questions:
 - What are the installation instructions?
 - What is the procedure to report issues?
 - Provide guidelines for contributing:
+- Provide your GitHub username for questions:
+- For further questions, place your email:
 - Choose the license type: 
 ```
 
 🌟🌟MAGIC HAPPENS🌟🌟
 
 Your README.md file with the information of your project has been created!
+
+Follow this tutorial video: [Walkthrough](https://drive.google.com/file/d/18JoJE3Xdzp5sGTx-x0sVUAPLxP-6CChs/view)
 
 ## License
 

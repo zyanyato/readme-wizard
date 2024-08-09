@@ -1,0 +1,33 @@
+
+# Read me creator
+    
+## Description
+A README file will be created after the information is input. 
+    
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+    
+## Installation
+Clone the code into your computer, open the terminal in the path you would like to create the README file and type “node index.js”.
+    
+## Usage
+The content of the README file is provided and the outcome is a professional README file. 
+    
+## Contributing
+Please contact: zyanya@bootcamp.com
+    
+## Questions
+
+- [GitHub](https://github.com/zyanyato),
+- Additional questions, please reach to: zyanya@bootcamp.com
+
+## License
+
+        This project is licensed under the MIT license. See [LICENSE](LICENSE) for more details.
+        
+        ![MIT License](https://img.shields.io/badge/License-MIT-purple)
+        
+    
